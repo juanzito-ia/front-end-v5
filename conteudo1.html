@@ -9,44 +9,27 @@
             font-family: Arial, sans-serif; 
             padding: 20px; 
             background-color: transparent; 
-            line-height: 1.6;
         }
 
         .titulo-secao {
-            margin: 30px 0 15px 0;
+            margin: 20px 0 15px 0;
             padding-left: 10px;
             border-left: 5px solid #2ecc71;
-            font-size: 24px;
+            font-size: 22px;
             color: #333;
         }
 
-        /* Grid de Vídeos no Topo */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
-        }
-
-        iframe {
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 10px;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        /* Container do Slideshow (Abaixo dos vídeos) */
+        /* Container do Slideshow em Primeiro */
         .slider-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             height: 400px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 30px auto;
             position: relative;
             background-color: #222;
             border-radius: 15px;
             overflow: hidden;
-            display: block !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .meu-slide {
@@ -69,61 +52,34 @@
             color: white;
             padding: 15px;
             text-align: center;
+            font-size: 18px;
         }
 
-        /* Espaçamento extra no final para permitir o scroll */
-        .espacador {
-            height: 100px;
+        /* Grid para os 6 vídeos embaixo */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
-    <h2 class="titulo-secao">Galeria de Vídeos</h2>
-    
-    <div class="video-grid">
-        <iframe src="https://www.youtube.com/embed/n_Etdr7Dbjs" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/UB1O30fR-EE" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg" allowfullscreen></iframe>
-    </div>
-
-    <hr>
-
     <h2 class="titulo-secao">Destaques em Slide</h2>
-
+    
     <div class="slider-container">
         <div class="meu-slide" style="display: block;">
-            <img src="https://picsum.photos/900/400?random=1">
-            <div class="legenda">Destaque 01 - Novidades</div>
+            <img src="https://picsum.photos/1000/400?random=10">
+            <div class="legenda">Bem-vindo aos Destaques Semanais</div>
         </div>
         <div class="meu-slide">
-            <img src="https://picsum.photos/900/400?random=2">
-            <div class="legenda">Destaque 02 - Projetos</div>
-        </div>
-        <div class="meu-slide">
-            <img src="https://picsum.photos/900/400?random=3">
-            <div class="legenda">Destaque 03 - Comunidade</div>
-        </div>
-    </div>
-
-    <div class="espacador"></div>
-
-    <script>
-        let slideIndex = 0;
-        const slides = document.getElementsByClassName("meu-slide");
-
-        function carrossel() {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1; }
-            
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(carrossel, 3000);
-        }
-
-        window.onload = carrossel;
-    </script>
-</body>
-</html>
+            <img src="
