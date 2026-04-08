@@ -23,7 +23,13 @@
             align-items: center;
             gap: 8px;
         }
-        #contador { font-weight: bold; color: #2ecc71; font-size: 1rem; }
+
+        #contador {
+            font-weight: bold;
+            color: #2ecc71;
+            font-size: 1rem;
+        }
+
         .dark .contador-container {
             background-color: rgba(236, 240, 241, 0.9);
             color: #2c3e50;
@@ -34,24 +40,23 @@
 <body>
 <div class="container">
     <nav class="menu-lateral">
-        <h2>Menu</h2>
+        <h2>📚 Menu</h2>
         <ul>
-            <li><a href="home.html" target="frameConteudo">Inicio</a></li>
-            <li><a href="conteudo1.html" target="frameConteudo">Videos</a></li>
-            <li><a href="conteudo2.html" target="frameConteudo">Imagens</a></li>
-            <li><a href="conteudo3.html" target="frameConteudo">Sobre</a></li>
-            <li><a href="admin.html" target="frameConteudo">Admin</a></li>
+            <li><a href="conteudo1.html" target="frameConteudo">🎥 Vídeos</a></li>
+            <li><a href="conteudo2.html" target="frameConteudo">🖼️ Imagens</a></li>
+            <li><a href="conteudo3.html" target="frameConteudo">📄 Sobre</a></li>
+            <li><a href="admin.html" target="frameConteudo">⚙️ Admin</a></li>
         </ul>
-        <button onclick="document.body.classList.toggle('dark')">Dark Mode</button>
-        <button onclick="window.location.href='login.html'" style="margin-top:10px; background:#e74c3c; color:white;">Sair</button>
+        <button onclick="document.body.classList.toggle('dark')">🌙 Dark Mode</button>
+        <button onclick="window.location.href='login.html'" style="margin-top:10px; background:#e74c3c; color:white;">🚪 Sair</button>
     </nav>
 
     <header class="cabecalho">
-        <h1>Painel Mini Site Profissional</h1>
+        <h1>🌐 Painel Mini Site Profissional</h1>
     </header>
 
     <main class="principal">
-        <iframe name="frameConteudo" src="home.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        <iframe name="frameConteudo" src="conteudo1.html" style="width: 100%; height: 100%; border: none;"></iframe>
     </main>
 
     <footer class="rodape">
@@ -59,7 +64,7 @@
     </footer>
 
     <div class="contador-container">
-        <span>Visitantes:</span>
+        <span>👤 Visitantes:</span>
         <span id="contador">0</span>
     </div>
 </div>
@@ -67,12 +72,19 @@
 <script>
     function atualizarContador() {
         let visitas = localStorage.getItem('contadorVisitas');
-        if (visitas) { visitas = parseInt(visitas) + 1; } 
-        else { visitas = 1; }
+
+        if (visitas) {
+            visitas = parseInt(visitas) + 1;
+        } else {
+            visitas = 1;
+        }
+
         localStorage.setItem('contadorVisitas', visitas);
         document.getElementById('contador').innerText = visitas;
     }
+
     window.onload = atualizarContador;
 </script>
+
 </body>
 </html>
