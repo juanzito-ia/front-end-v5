@@ -3,112 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; padding: 20px; background: white; margin: 0; }
         
-        body { 
-            font-family: Arial, sans-serif; 
-            padding: 20px; 
-            background-color: white !important;
-            min-height: 1500px; /* Força o corpo da página a ser comprido */
-        }
+        .secao { margin-bottom: 40px; }
+        h2 { border-left: 5px solid #2ecc71; padding-left: 10px; margin-bottom: 20px; }
 
-        .titulo-secao {
-            margin: 30px 0 15px 0;
-            padding-left: 10px;
-            border-left: 5px solid #2ecc71;
-            font-size: 22px;
-            display: block !important;
+        /* Slideshow */
+        .slider {
+            width: 100%; max-width: 800px; height: 300px;
+            margin: 0 auto; position: relative; background: #333;
+            border-radius: 10px; overflow: hidden;
         }
+        .slide { display: none; width: 100%; height: 100%; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Container do Slideshow no Topo */
-        .slider-box {
-            width: 100%;
-            max-width: 900px;
-            height: 350px;
-            margin: 0 auto 40px auto;
-            position: relative;
-            background-color: #333;
-            border-radius: 15px;
-            overflow: hidden;
-            display: block !important;
-        }
-
-        .item-slide {
-            display: none;
-            width: 100%;
-            height: 100%;
-        }
-
-        .item-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Grid de Vídeos - Forçando exibição */
-        .area-videos {
-            display: grid !important;
+        /* Grid de Vídeos */
+        .grid {
+            display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            width: 100%;
-            margin-top: 20px;
-            padding-bottom: 50px;
         }
-
-        .video-card {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #eee;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        .video-box { width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: #000; }
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
 
-    <h2 class="titulo-secao">Destaques</h2>
-    <div class="slider-box">
-        <div class="item-slide" style="display: block;">
-            <img src="https://picsum.photos/900/350?random=1">
-        </div>
-        <div class="item-slide">
-            <img src="https://picsum.photos/900/350?random=2">
-        </div>
-        <div class="item-slide">
-            <img src="https://picsum.photos/900/350?random=3">
+    <div class="secao">
+        <h2>Destaques</h2>
+        <div class="slider">
+            <div class="slide" style="display: block;"><img src="https://picsum.photos/800/300?random=1"></div>
+            <div class="slide"><img src="https://picsum.photos/800/300?random=2"></div>
+            <div class="slide"><img src="https://picsum.photos/800/300?random=3"></div>
         </div>
     </div>
 
-    <h2 class="titulo-secao">Galeria de Vídeos (6 vídeos)</h2>
-    <div class="area-videos">
-        <div class="video-card"><iframe src="https://www.youtube.com/embed/n_Etdr7Dbjs"></iframe></div>
-        <div class="video-card"><iframe src="https://www.youtube.com/embed/UB1O30fR-EE"></iframe></div>
-        <div class="video-card"><iframe src="https://www.youtube.com/embed/pQN-pnXPaVg"></iframe></div>
-        <div class="video-card"><iframe src="https://www.youtube.com/embed/S9uPNppGsGo"></iframe></div>
-        <div class="video-card"><iframe src="https://www.youtube.com/embed/Ptbk2af68e8"></iframe></div>
-        <div class="video-card"><iframe src="https://www.youtube.com/embed/mH0S_R-wD8I"></iframe></div>
+    <div class="secao">
+        <h2>Vídeos Educativos</h2>
+        <div class="grid">
+            <div class="video-box"><iframe src="https://www.youtube.com/embed/n_Etdr7Dbjs"></iframe></div>
+            <div class="video-box"><iframe src="https://www.youtube.com/embed/UB1O30fR-EE"></iframe></div>
+            <div class="video-box"><iframe src="https://www.youtube.com/embed/pQN-pnXPaVg"></iframe></div>
+            <div class="video-box"><iframe src="https://www.youtube.com/embed/S9uPNppGsGo"></iframe></div>
+            <div class="video-box"><iframe src="https://www.youtube.com/embed/Ptbk2af68e8"></iframe></div>
+            <div class="video-box"><iframe src="https://www.youtube.com/embed/mH0S_R-wD8I"></iframe></div>
+        </div>
     </div>
 
     <script>
-        let slidePos = 0;
-        const slides = document.getElementsByClassName("item-slide");
-
-        function rodarSlider() {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slidePos++;
-            if (slidePos > slides.length) { slidePos = 1; }
-            slides[slidePos - 1].style.display = "block";
-            setTimeout(rodarSlider, 3000);
+        let index = 0;
+        const slides = document.querySelectorAll(".slide");
+        function show() {
+            slides.forEach(s => s.style.display = "none");
+            index++;
+            if (index > slides.length) index = 1;
+            slides[index-1].style.display = "block";
+            setTimeout(show, 3000);
         }
-        rodarSlider();
+        show();
     </script>
 </body>
 </html>
