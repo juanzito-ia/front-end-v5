@@ -7,7 +7,38 @@
         body.pagina {
             padding: 20px;
             font-family: Arial, sans-serif;
+            background-color: transparent;
         }
+
+        /* Estilos do Slideshow */
+        .slideshow-container {
+            max-width: 100%;
+            height: 350px;
+            position: relative;
+            margin: 0 auto 40px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .mySlides { display: none; height: 100%; }
+        .mySlides img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .prev, .next {
+            cursor: pointer; position: absolute; top: 50%; width: auto;
+            padding: 16px; margin-top: -22px; color: white; font-weight: bold;
+            font-size: 20px; background: rgba(0,0,0,0.3); border: none;
+            border-radius: 0 3px 3px 0; user-select: none;
+        }
+        .next { right: 0; border-radius: 3px 0 0 3px; }
+        .text {
+            color: white; font-size: 16px; padding: 15px;
+            position: absolute; bottom: 0; width: 100%;
+            background: rgba(0,0,0,0.6); text-align: center;
+        }
+        .fade { animation: fade 1.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+        /* Estilos da Grid de Vídeos */
         .grid-videos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -20,27 +51,71 @@
             border: none;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
+        h2 { margin: 20px 0; color: #333; border-left: 5px solid #2ecc71; padding-left: 10px; }
     </style>
 </head>
 <body class="pagina">
 
-<div class="conteudo">
-    <h2>Videos Educativos</h2>
-
-    <div class="grid-videos">
-        <iframe src="https://www.youtube.com/embed/n_Etdr7Dbjs" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/UB1O30fR-EE" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg" allowfullscreen></iframe>
+    <div class="conteudo">
         
-        <iframe src="https://www.youtube.com/embed/S9uPNppGsGo" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/Ptbk2af68e8" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/OZ1bpyBrpnE?si=Rfdy9LHBMJM3MSAr" allowfullscreen></iframe>
+        <h2>Destaques</h2>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="https://picsum.photos/1200/400?random=1">
+                <div class="text">Novidades da Semana</div>
+            </div>
+            <div class="mySlides fade">
+                <img src="https://picsum.photos/1200/400?random=2">
+                <div class="text">Projetos em Destaque</div>
+            </div>
+            <div class="mySlides fade">
+                <img src="https://picsum.photos/1200/400?random=3">
+                <div class="text">Área de Membros Ativa</div>
+            </div>
+
+            <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+            <button class="next" onclick="plusSlides(1)">&#10095;</button>
+        </div>
+
+        <h2>Vídeos Educativos</h2>
+        <div class="grid-videos">
+            <iframe src="https://www.youtube.com/embed/n_Etdr7Dbjs" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/UB1O30fR-EE" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/S9uPNppGsGo" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/Ptbk2af68e8" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/mH0S_R-wD8I" allowfullscreen></iframe>
+        </div>
+
     </div>
-</div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 4000); 
+        }
+
+        function plusSlides(n) {
+            let slides = document.getElementsByClassName("mySlides");
+            slideIndex += n;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            if (slideIndex < 1) {slideIndex = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+    </script>
 
 </body>
 </html>
