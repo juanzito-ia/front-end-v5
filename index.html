@@ -35,6 +35,21 @@
             color: #2c3e50;
             border: 1px solid #bdc3c7;
         }
+
+        /* AJUSTE CRÍTICO: Garante que a área principal permita rolagem */
+        .principal {
+            height: calc(100vh - 120px); /* Ajusta a altura descontando cabeçalho/rodapé */
+            overflow-y: auto; /* Permite rolar para ver os vídeos abaixo */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Faz o iframe ser alto o suficiente para os 6 vídeos */
+        iframe[name="frameConteudo"] {
+            min-height: 1500px; /* Altura mínima grande para caber slide + 6 vídeos */
+            width: 100%;
+            border: none;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -56,7 +71,7 @@
     </header>
 
     <main class="principal">
-        <iframe name="frameConteudo" src="conteudo1.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        <iframe name="frameConteudo" src="conteudo1.html"></iframe>
     </main>
 
     <footer class="rodape">
@@ -72,17 +87,14 @@
 <script>
     function atualizarContador() {
         let visitas = localStorage.getItem('contadorVisitas');
-
         if (visitas) {
             visitas = parseInt(visitas) + 1;
         } else {
             visitas = 1;
         }
-
         localStorage.setItem('contadorVisitas', visitas);
         document.getElementById('contador').innerText = visitas;
     }
-
     window.onload = atualizarContador;
 </script>
 
