@@ -8,78 +8,107 @@
         body { 
             font-family: Arial, sans-serif; 
             padding: 20px; 
-            background-color: transparent; 
+            background-color: white !important;
+            min-height: 1500px; /* Força o corpo da página a ser comprido */
         }
 
         .titulo-secao {
-            margin: 20px 0 15px 0;
+            margin: 30px 0 15px 0;
             padding-left: 10px;
             border-left: 5px solid #2ecc71;
             font-size: 22px;
-            color: #333;
+            display: block !important;
         }
 
-        /* Container do Slideshow em Primeiro */
-        .slider-container {
+        /* Container do Slideshow no Topo */
+        .slider-box {
             width: 100%;
-            max-width: 1000px;
-            height: 400px;
-            margin: 0 auto 30px auto;
+            max-width: 900px;
+            height: 350px;
+            margin: 0 auto 40px auto;
             position: relative;
-            background-color: #222;
+            background-color: #333;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: block !important;
         }
 
-        .meu-slide {
+        .item-slide {
             display: none;
             width: 100%;
             height: 100%;
         }
 
-        .meu-slide img {
+        .item-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .legenda {
-            position: absolute;
-            bottom: 0;
+        /* Grid de Vídeos - Forçando exibição */
+        .area-videos {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             width: 100%;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 18px;
+            margin-top: 20px;
+            padding-bottom: 50px;
         }
 
-        /* Grid para os 6 vídeos embaixo */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
+        .video-card {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         iframe {
             width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 10px;
+            height: 100%;
             border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
-    <h2 class="titulo-secao">Destaques em Slide</h2>
-    
-    <div class="slider-container">
-        <div class="meu-slide" style="display: block;">
-            <img src="https://picsum.photos/1000/400?random=10">
-            <div class="legenda">Bem-vindo aos Destaques Semanais</div>
+    <h2 class="titulo-secao">Destaques</h2>
+    <div class="slider-box">
+        <div class="item-slide" style="display: block;">
+            <img src="https://picsum.photos/900/350?random=1">
         </div>
-        <div class="meu-slide">
-            <img src="
+        <div class="item-slide">
+            <img src="https://picsum.photos/900/350?random=2">
+        </div>
+        <div class="item-slide">
+            <img src="https://picsum.photos/900/350?random=3">
+        </div>
+    </div>
+
+    <h2 class="titulo-secao">Galeria de Vídeos (6 vídeos)</h2>
+    <div class="area-videos">
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/n_Etdr7Dbjs"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/UB1O30fR-EE"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/pQN-pnXPaVg"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/S9uPNppGsGo"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/Ptbk2af68e8"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/mH0S_R-wD8I"></iframe></div>
+    </div>
+
+    <script>
+        let slidePos = 0;
+        const slides = document.getElementsByClassName("item-slide");
+
+        function rodarSlider() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slidePos++;
+            if (slidePos > slides.length) { slidePos = 1; }
+            slides[slidePos - 1].style.display = "block";
+            setTimeout(rodarSlider, 3000);
+        }
+        rodarSlider();
+    </script>
+</body>
+</html>
