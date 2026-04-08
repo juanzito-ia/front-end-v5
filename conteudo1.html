@@ -2,43 +2,54 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Juan</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: white; margin: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { padding: 20px; background: #f4f4f4; }
         
-        .secao { margin-bottom: 40px; }
-        h2 { border-left: 5px solid #2ecc71; padding-left: 10px; margin-bottom: 20px; }
+        .secao { margin-bottom: 40px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+        h2 { border-left: 5px solid #2ecc71; padding-left: 10px; margin-bottom: 20px; color: #333; }
 
         /* Slideshow Container */
-        .slider {
-            width: 100%; max-width: 800px; height: 350px;
-            margin: 0 auto; position: relative; background: #333;
-            border-radius: 10px; overflow: hidden;
+        .slider-container {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            background: #333;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .slide { display: none; width: 100%; height: 100%; }
         .slide img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Estilo das Setas */
+        /* Estilo das Setas (Botoes Passaveis) */
         .seta {
             cursor: pointer;
             position: absolute;
             top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -22px;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.6);
             color: white;
-            font-weight: bold;
-            font-size: 20px;
-            transition: 0.3s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            background-color: rgba(0,0,0,0.4);
             border: none;
-            z-index: 10;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s;
+            z-index: 100; /* Garante que fiquem acima das imagens */
+            user-select: none;
         }
-        .seta:hover { background-color: rgba(0,0,0,0.8); }
-        .seta-dir { right: 0; border-radius: 3px 0 0 3px; }
-        .seta-esq { left: 0; }
+
+        .seta:hover { background-color: #2ecc71; }
+        .seta-esq { left: 15px; }
+        .seta-dir { right: 15px; }
 
         /* Grid de Vídeos */
         .grid {
@@ -46,7 +57,7 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
-        .video-box { width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: #000; }
+        .video-box { width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: #000; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
@@ -54,13 +65,13 @@
 
     <div class="secao">
         <h2>Destaques</h2>
-        <div class="slider">
+        <div class="slider-container">
             <button class="seta seta-esq" onclick="mudarSlide(-1)">&#10094;</button>
             <button class="seta seta-dir" onclick="mudarSlide(1)">&#10095;</button>
 
-            <div class="slide"><img src="https://picsum.photos/800/350?random=1"></div>
-            <div class="slide"><img src="https://picsum.photos/800/350?random=2"></div>
-            <div class="slide"><img src="https://picsum.photos/800/350?random=3"></div>
+            <div class="slide"><img src="https://picsum.photos/800/400?random=1"></div>
+            <div class="slide"><img src="https://picsum.photos/800/400?random=2"></div>
+            <div class="slide"><img src="https://picsum.photos/800/400?random=3"></div>
         </div>
     </div>
 
@@ -81,12 +92,10 @@
         let timer;
         const slides = document.querySelectorAll(".slide");
 
-        // Inicializa o primeiro slide
         mostrarSlide(index);
 
-        // Função para mudar o slide (botões)
         function mudarSlide(n) {
-            clearTimeout(timer); // Para o tempo automático quando o usuário clica
+            clearTimeout(timer); 
             mostrarSlide(index += n);
         }
 
@@ -94,16 +103,16 @@
             if (n > slides.length) { index = 1 }
             if (n < 1) { index = slides.length }
             
-            // Esconde todos
+            // Esconde apenas os slides, os botoes ficam fora desse loop
             slides.forEach(s => s.style.display = "none");
             
-            // Mostra o atual
+            // Mostra o slide atual
             slides[index-1].style.display = "block";
             
-            // Reinicia a passagem automática (4 segundos)
+            // Passagem automática
             timer = setTimeout(() => {
                 mostrarSlide(index += 1);
-            }, 4000);
+            }, 5000);
         }
     </script>
 </body>
