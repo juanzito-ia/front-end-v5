@@ -2,120 +2,71 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        body.pagina {
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background-color: transparent;
-        }
-
-        /* Estilos do Slideshow */
-        .slideshow-container {
-            max-width: 100%;
-            height: 350px;
-            position: relative;
-            margin: 0 auto 40px auto;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .mySlides { display: none; height: 100%; }
-        .mySlides img { width: 100%; height: 100%; object-fit: cover; }
+        body { font-family: sans-serif; margin: 20px; background: #f4f4f4; }
         
-        .prev, .next {
-            cursor: pointer; position: absolute; top: 50%; width: auto;
-            padding: 16px; margin-top: -22px; color: white; font-weight: bold;
-            font-size: 20px; background: rgba(0,0,0,0.3); border: none;
-            border-radius: 0 3px 3px 0; user-select: none;
+        /* Garante que o container seja visível */
+        .slideshow-container {
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            margin: 0 auto 30px;
+            position: relative;
+            background: #ccc; /* Cor de fundo caso a imagem falhe */
+            border-radius: 10px;
+            overflow: hidden;
+            display: block !important; /* Força a exibição */
         }
-        .next { right: 0; border-radius: 3px 0 0 3px; }
-        .text {
-            color: white; font-size: 16px; padding: 15px;
-            position: absolute; bottom: 0; width: 100%;
-            background: rgba(0,0,0,0.6); text-align: center;
-        }
-        .fade { animation: fade 1.5s; }
-        @keyframes fade { from {opacity: .4} to {opacity: 1} }
 
-        /* Estilos da Grid de Vídeos */
+        .mySlides { display: none; width: 100%; height: 100%; }
+        
+        img { width: 100%; height: 100%; object-fit: cover; }
+
+        .active-slide { display: block; }
+
         .grid-videos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
-        iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border-radius: 8px;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        h2 { margin: 20px 0; color: #333; border-left: 5px solid #2ecc71; padding-left: 10px; }
+        iframe { width: 100%; aspect-ratio: 16/9; border-radius: 8px; border: none; }
     </style>
 </head>
-<body class="pagina">
+<body>
 
-    <div class="conteudo">
-        
-        <h2>Destaques</h2>
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-                <img src="https://picsum.photos/1200/400?random=1">
-                <div class="text">Novidades da Semana</div>
-            </div>
-            <div class="mySlides fade">
-                <img src="https://picsum.photos/1200/400?random=2">
-                <div class="text">Projetos em Destaque</div>
-            </div>
-            <div class="mySlides fade">
-                <img src="https://picsum.photos/1200/400?random=3">
-                <div class="text">Área de Membros Ativa</div>
-            </div>
-
-            <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
-            <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    <h2>Destaques</h2>
+    <div class="slideshow-container">
+        <div class="mySlides active-slide">
+            <img src="https://picsum.photos/800/300?sig=1">
         </div>
-
-        <h2>Vídeos Educativos</h2>
-        <div class="grid-videos">
-            <iframe src="https://www.youtube.com/embed/n_Etdr7Dbjs" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/UB1O30fR-EE" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/S9uPNppGsGo" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/Ptbk2af68e8" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/mH0S_R-wD8I" allowfullscreen></iframe>
+        <div class="mySlides">
+            <img src="https://picsum.photos/800/300?sig=2">
         </div>
+        <div class="mySlides">
+            <img src="https://picsum.photos/800/300?sig=3">
+        </div>
+    </div>
 
+    <h2>Vídeos</h2>
+    <div class="grid-videos">
+        <iframe src="https://www.youtube.com/embed/n_Etdr7Dbjs"></iframe>
+        <iframe src="https://www.youtube.com/embed/UB1O30fR-EE"></iframe>
     </div>
 
     <script>
-        let slideIndex = 0;
-        showSlides();
+        let slideIdx = 0;
+        const slides = document.getElementsByClassName("mySlides");
 
-        function showSlides() {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
-            setTimeout(showSlides, 4000); 
-        }
-
-        function plusSlides(n) {
-            let slides = document.getElementsByClassName("mySlides");
-            slideIndex += n;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            if (slideIndex < 1) {slideIndex = slides.length}
+        function rotate() {
             for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
+                slides[i].style.display = "none";
             }
-            slides[slideIndex-1].style.display = "block";
+            slideIdx++;
+            if (slideIdx > slides.length) { slideIdx = 1; }
+            slides[slideIdx - 1].style.display = "block";
+            setTimeout(rotate, 3000);
         }
+        rotate();
     </script>
-
 </body>
 </html>
